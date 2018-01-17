@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 10f;
-    public float jumpForce = 1000f;
 
     private Rigidbody2D rb;
     private Animator anim;
@@ -29,10 +28,16 @@ public class PlayerController : MonoBehaviour
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
 
-        moveDir = new Vector3(h, 0, 0);
+        moveDir = new Vector2(h, 0);
 
         transform.position += moveDir * moveSpeed * Time.deltaTime;
 
+        if (jump == true)
+        {
+            //rb.AddForce(new Vector2(0f, jumpForce));
+            rb.velocity = new Vector2(0, 6);
+            jump = false;
+        }
     }
 
     void Update()
