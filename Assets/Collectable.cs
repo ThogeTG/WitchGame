@@ -14,10 +14,16 @@ public class Collectable : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        grounded = Physics2D.Linecast(transform.position, new Vector2(transform.position.x, transform.position.y - 0.25f), 1 << LayerMask.NameToLayer("Ground"));
+        //grounded = Physics2D.Linecast(transform.position, new Vector2(transform.position.x, transform.position.y - 0.25f), 1 << LayerMask.NameToLayer("Ground"));
+        //if (grounded)
+        //{
+        //    myRb.AddForce(new Vector2(0, 50));
+        //}
+
+        grounded = Physics2D.Linecast(transform.position, new Vector2(transform.position.x, transform.position.y - 0.4f), 1 << LayerMask.NameToLayer("Collectables"));
         if (grounded)
         {
-            myRb.AddForce(new Vector2(0, 50));
+            myRb.AddForce(new Vector2(5, 0));
         }
     }
 }
