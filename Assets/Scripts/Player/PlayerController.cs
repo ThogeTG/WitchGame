@@ -9,6 +9,27 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float jumpSpeed;
 
+    [SerializeField]
+    private int playerHP;
+
+    public int Health
+    {
+        get
+        {
+            return playerHP;
+        }
+
+        set
+        {
+            playerHP = value;
+            Debug.Log("HP: " + playerHP);
+            if (playerHP <= 0)
+            {
+                Destroy(gameObject);
+            }
+        }
+    }
+
     private Rigidbody2D rb;
 
     float h;
@@ -85,12 +106,29 @@ public class PlayerController : MonoBehaviour
             {
                 GameObject spawned = Instantiate(fireBall, transform.position, transform.rotation);
                 spawned.GetComponent<Rigidbody2D>().AddForce(new Vector2(fireBallSpeed, 0));
+
+                Destroy(spawned, 2);
             }
             if (lookRight == false)
             {
                 GameObject spawned = Instantiate(fireBall, transform.position, transform.rotation);
                 spawned.GetComponent<Rigidbody2D>().AddForce(new Vector2(-fireBallSpeed, 0));
+
+                Destroy(spawned, 2);
             }
+        }
+    }
+
+    public void PlayerTakesDamage(int damage)
+    {
+        Health -= damage;
+    }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Bullet")
+        {
+            PlayerTakesDamage(10);
         }
     }
 }
