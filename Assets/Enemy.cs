@@ -10,19 +10,23 @@ public class Enemy : MonoBehaviour {
     float verticalDistance;
     public float jumpTimer;
     public int HP;
-    public AudioSource jumpSound;
-    public AudioSource landingSound;
+    public AudioSource aSource;
+    public AudioClip jumpSound;
+    public AudioClip landingSound;
+    [SerializeField]
     bool grounded;
     [SerializeField]
-    Transform ground;
+    Transform groundCheck;
     
 
     // Use this for initialization
     void Start ()
     {
+
+
         verticalDistance = transform.position.x - player.transform.position.x;
 
-        jumpSound = GetComponent<AudioSource>();
+        aSource = GetComponent<AudioSource>();
 
         myRB = gameObject.GetComponent<Rigidbody2D>();
     }
@@ -30,11 +34,11 @@ public class Enemy : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
+        grounded = Physics2D.Linecast(transform.position, groundCheck.transform.position, 1 << LayerMask.NameToLayer("Ground"));
+
         jumpTimer -= Time.deltaTime;
 
-        grounded = Physics2D.Linecast(transform.position, 1 << LayerMask.NameToLayer("Ground"));
-
-        if (jumpTimer <= 0)
+        if (jumpTimer <= 0 && grounded)
         {
             Jump();
         }
@@ -48,7 +52,8 @@ public class Enemy : MonoBehaviour {
 
     void Jump()
     {
-        jumpSound.Play();
+        aSource.clip = jumpSound;
+        aSource.Play();
 
         if (transform.position.x < player.transform.position.x)
         {
@@ -76,6 +81,11 @@ public class Enemy : MonoBehaviour {
         {
             HP--;
             DestroyObject(fireball);
+
+            if (HP == 0)
+            {
+                DestroyObject(gameObject);
+            }
         }
         
     }
