@@ -4,9 +4,14 @@
 TagManager:
   serializedVersion: 2
   tags:
+<<<<<<< HEAD
   - PlayerTag
   - Ground
   - EnemyTag
+=======
+  - Ground
+  - Bullet
+>>>>>>> 66f86c3ec6f7348865cbf1ca1394cfa055159087
   layers:
   - Default
   - TransparentFX
