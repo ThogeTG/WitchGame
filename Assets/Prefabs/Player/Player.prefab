@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4159953615548550}
   - component: {fileID: 212002922748779556}
   - component: {fileID: 50491525434900450}
-  - component: {fileID: 58402728307703982}
+  - component: {fileID: 70391626697687304}
   - component: {fileID: 114778320257984198}
   m_Layer: 0
   m_Name: Player
@@ -52,7 +52,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1709940979433844}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.66, z: 0}
+  m_LocalPosition: {x: -6.607096, y: -2.91, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4815593291742030}
@@ -92,8 +92,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!58 &58402728307703982
-CircleCollider2D:
+--- !u!70 &70391626697687304
+CapsuleCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -105,8 +105,8 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
+  m_Size: {x: 0.5, y: 1}
+  m_Direction: 0
 --- !u!114 &114778320257984198
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -119,6 +119,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
+  jumpSpeed: 8
+  playerHP: 50
   grounded: 0
   groundCheck: {fileID: 4815593291742030}
   fireBall: {fileID: 1093415138729206, guid: bdff0779e18f4a04aa1bdbc8bd5100c9, type: 2}
@@ -157,7 +159,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 125ab54a93ce5d745a701eda00f44e77, type: 3}
-  m_Color: {r: 0.2711938, g: 0.79694533, b: 0.9705882, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
