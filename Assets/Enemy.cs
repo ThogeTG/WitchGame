@@ -8,8 +8,8 @@ public class Enemy : MonoBehaviour {
     public Transform player;
     public float thrust;
     float verticalDistance;
-    public float jumpTimer;
-    public int HP;
+    public float jumpTimer = 3;
+    public int HP = 3;
     public AudioSource aSource;
     public AudioClip jumpSound;
     public AudioClip landingSound;
@@ -22,7 +22,7 @@ public class Enemy : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-
+        player = GameObject.Find("Player").transform;
 
         verticalDistance = transform.position.x - player.transform.position.x;
 
