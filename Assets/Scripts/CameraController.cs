@@ -19,9 +19,10 @@ public class CameraController : MonoBehaviour
 
     void Start()
     {
-        canMove = true;
+        //canMove = true;
+        cannotMoveDown = true;
 
-        //transform.position.Set(player.transform.position.x, player.transform.position.y + 0.5f, transform.position.z);
+        //transform.position.Set(player.transform.position.x, player.transform.position.y + 5f, transform.position.z);
     }
 
     void Update()
@@ -31,25 +32,15 @@ public class CameraController : MonoBehaviour
 
     void LateUpdate()
     {
-        /*if (cannotMoveDown == true && canMove == true)
-        {
-            transform.position = new Vector3(player.transform.position.x, player.transform.position.y, transform.position.z);
-        }*/
-
-
-        /*if (canMove == true && cannotMoveDown == false)
-        {
-
-        }*/
-
         if (canMove == true)
         {
-            transform.position = new Vector3(player.transform.position.x, transform.position.y, transform.position.z);
+            transform.position = new Vector3(player.transform.position.x, player.transform.position.y, transform.position.z);
         }
+        
 
-
-        if (canMove == false && cannotMoveDown == true)
+        if (canMove == false)
         {
+            
             transform.position = new Vector3(transform.position.x, player.transform.position.y, transform.position.z);
 
             if (rightWall == false && player.transform.position.x >= transform.position.x)
@@ -60,12 +51,8 @@ public class CameraController : MonoBehaviour
             if (rightWall == true && player.transform.position.x <= transform.position.x)
             {
                 canMove = true;
+                rightWall = false;
             }
-        }
-
-        if (cannotMoveDown == true && player.transform.position.y >= transform.position.y)
-        {
-            transform.position = new Vector3(player.transform.position.x, player.transform.position.y, transform.position.z);
         }
 
         Debug.Log("player.transform.position.x=" + player.transform.position.x);
@@ -91,7 +78,6 @@ public class CameraController : MonoBehaviour
         {
             floor = true;
             cannotMoveDown = true;
-            //canMove = false;
             transform.position.Set(transform.position.x, transform.position.y + 0.1f, transform.position.z);
         }
     }
