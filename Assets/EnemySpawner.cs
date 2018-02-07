@@ -9,6 +9,8 @@ public class EnemySpawner : MonoBehaviour {
     public int enemySpawns;
     public float spawnTime;
     public Transform spawnLocation;
+    private GameObject spawned;
+    
 
 	// Use this for initialization
 	void Start ()
@@ -23,15 +25,19 @@ public class EnemySpawner : MonoBehaviour {
     {
         spawnTime -= Time.deltaTime;
 
-        if (spawnTime <= 0 && enemySpawns >= 0)
+        if (spawnTime <= 0 && enemySpawns > 0)
         {
             Spawn();
+        }
+        else
+        {
+            return;
         }
     }
 
     void Spawn ()
     {
-        Instantiate(enemy, spawnLocation);
+        spawned = Instantiate(enemy, spawnLocation);
 
         spawnTime = 3;
 

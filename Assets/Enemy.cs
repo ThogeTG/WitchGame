@@ -17,11 +17,16 @@ public class Enemy : MonoBehaviour {
     bool grounded;
     [SerializeField]
     Transform groundCheck;
+    public SpriteRenderer spriteRen;
     
 
     // Use this for initialization
     void Start ()
     {
+        spriteRen = gameObject.GetComponent<SpriteRenderer>();
+
+        spriteRen.flipX = false;
+
         player = GameObject.Find("Player").transform;
 
         verticalDistance = transform.position.x - player.transform.position.x;
@@ -37,6 +42,16 @@ public class Enemy : MonoBehaviour {
         grounded = Physics2D.Linecast(transform.position, groundCheck.transform.position, 1 << LayerMask.NameToLayer("Ground"));
 
         jumpTimer -= Time.deltaTime;
+
+        if (transform.position.x < player.transform.position.x)
+        {
+            spriteRen.flipX = false;
+        }
+
+        else if (transform.position.x > player.transform.position.x)
+        {
+            spriteRen.flipX = true;
+        }
 
         if (jumpTimer <= 0 && grounded)
         {
