@@ -9,6 +9,7 @@ TagManager:
   - PlayerTag
   - RoomColliderLeft
   - RoomColliderRight
+  - RoomColliderFloor
   layers:
   - Default
   - TransparentFX

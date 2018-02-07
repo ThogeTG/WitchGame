@@ -10,11 +10,18 @@ public class CameraController : MonoBehaviour
     [SerializeField]
     private bool canMove;
     [SerializeField]
+    private bool cannotMoveDown;
+    [SerializeField]
     private bool rightWall;
+    private float yOffset;
+
+    private bool floor;
 
     void Start()
     {
         canMove = true;
+
+        //transform.position.Set(player.transform.position.x, player.transform.position.y + 0.5f, transform.position.z);
     }
 
     void Update()
@@ -24,12 +31,24 @@ public class CameraController : MonoBehaviour
 
     void LateUpdate()
     {
-        if (canMove == true)
+        /*if (cannotMoveDown == true && canMove == true)
         {
             transform.position = new Vector3(player.transform.position.x, player.transform.position.y, transform.position.z);
+        }*/
+
+
+        /*if (canMove == true && cannotMoveDown == false)
+        {
+
+        }*/
+
+        if (canMove == true)
+        {
+            transform.position = new Vector3(player.transform.position.x, transform.position.y, transform.position.z);
         }
 
-        if (canMove == false)
+
+        if (canMove == false && cannotMoveDown == true)
         {
             transform.position = new Vector3(transform.position.x, player.transform.position.y, transform.position.z);
 
@@ -42,6 +61,11 @@ public class CameraController : MonoBehaviour
             {
                 canMove = true;
             }
+        }
+
+        if (cannotMoveDown == true && player.transform.position.y >= transform.position.y)
+        {
+            transform.position = new Vector3(player.transform.position.x, player.transform.position.y, transform.position.z);
         }
 
         Debug.Log("player.transform.position.x=" + player.transform.position.x);
@@ -61,6 +85,14 @@ public class CameraController : MonoBehaviour
             canMove = false;
             rightWall = true;
             transform.position.Set(transform.position.x - 0.1f, transform.position.y, transform.position.z);
+        }
+
+        if (collision.tag == "RoomColliderFloor")
+        {
+            floor = true;
+            cannotMoveDown = true;
+            //canMove = false;
+            transform.position.Set(transform.position.x, transform.position.y + 0.1f, transform.position.z);
         }
     }
 }
