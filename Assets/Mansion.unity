@@ -721,6 +721,11 @@ Prefab:
       propertyPath: m_LocalPosition.y
       value: -1.321
       objectReference: {fileID: 0}
+    - target: {fileID: 114778320257984198, guid: d59d46240e37d044282aebea5eac8d0b,
+        type: 2}
+      propertyPath: jumpSpeed
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d46240e37d044282aebea5eac8d0b, type: 2}
   m_IsPrefabParent: 0
@@ -1395,7 +1400,9 @@ MonoBehaviour:
   player: {fileID: 2079319413}
   roomNumber: 0
   canMove: 0
+  cannotMoveDown: 0
   rightWall: 0
+  currentFloor: {fileID: 0}
 --- !u!61 &1537774614
 BoxCollider2D:
   m_ObjectHideFlags: 0
