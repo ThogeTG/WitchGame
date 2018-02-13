@@ -4,4 +4,13 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/MainMenu.unity
+    guid: dcee3e2dbc93ee04a920e1e07e8830d4
+  - enabled: 1
+    path: Assets/Mansion.unity
+    guid: d6ff0730a43ce164eb67f85443c0b756
+  - enabled: 1
+    path: Assets/JallunTesti.unity
+    guid: 00000000000000000000000000000000
