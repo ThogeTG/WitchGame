@@ -8,9 +8,12 @@ public class Collectable : MonoBehaviour {
     public Rigidbody2D myRb;
     public bool canCollect = false;
 
-	// Use this for initialization
-	void Start () {
+    public ItemManager itemManager;
+
+    // Use this for initialization
+    void Start () {
         myRb = gameObject.GetComponent<Rigidbody2D>();
+        itemManager = GameObject.Find("ItemManager").GetComponent<ItemManager>();
 	}
 	
 	// Update is called once per frame
@@ -31,6 +34,14 @@ public class Collectable : MonoBehaviour {
         else
         {
             myRb.gravityScale = 1;
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Player" && canCollect == true)
+        {
+            itemManager.Add(gameObject);
+            Destroy(gameObject);
         }
     }
 }

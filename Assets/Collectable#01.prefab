@@ -138,6 +138,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grounded: 0
   myRb: {fileID: 0}
+  canCollect: 0
+  itemManager: {fileID: 0}
 --- !u!212 &212219356773943896
 SpriteRenderer:
   m_ObjectHideFlags: 1
