@@ -104,14 +104,14 @@ public class PlayerController : MonoBehaviour
 
             if (lookRight == true)
             {
-                GameObject spawned = Instantiate(fireBall, transform.position, transform.rotation);
+                GameObject spawned = Instantiate(fireBall, new Vector3(transform.position.x + 0.5f, transform.position.y - 0.1f, transform.position.z), transform.rotation);
                 spawned.GetComponent<Rigidbody2D>().AddForce(new Vector2(fireBallSpeed, 0));
 
                 Destroy(spawned, 2);
             }
             if (lookRight == false)
             {
-                GameObject spawned = Instantiate(fireBall, transform.position, transform.rotation);
+                GameObject spawned = Instantiate(fireBall, new Vector3(transform.position.x - 0.5f, transform.position.y - 0.1f, transform.position.z), transform.rotation);
                 spawned.GetComponent<Rigidbody2D>().AddForce(new Vector2(-fireBallSpeed, 0));
 
                 Destroy(spawned, 2);

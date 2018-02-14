@@ -4,85 +4,72 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public GameObject player;
+    public Transform player;
+    public float floorY;
+    public float wallX;
+    public float xOffset = 0;
+    public float yOffset = 0;
+    public float cameraSize;
 
-    public int roomNumber;
-    [SerializeField]
-    private bool canMove;
-    [SerializeField]
-    private bool cannotMoveDown;
-    [SerializeField]
-    private bool rightWall;
-    private float yOffset;
-
-    private bool floor;
-
-    [SerializeField]
-    private bool movementRestricted;
-    private bool jumpedMovement;
-
-    void Start()
+    public bool lastWasRight;
+  
+   void Start()
     {
-        cannotMoveDown = true;
-        //canMove = true;
-
-        //transform.position.Set(player.transform.position.x, player.transform.position.y + 5f, transform.position.z);
+        player = GameObject.Find("Player").transform;
+        cameraSize = gameObject.GetComponent<Camera>().orthographicSize;
     }
 
-    void Update()
-    {
 
+  void Update()
+    {
+        
     }
 
+    //Only place where we set position of the camera.
     void LateUpdate()
     {
-        if (canMove == true)
+        // Let's set Offset in Y axis.
+        if (player.position.y > floorY)
         {
-            transform.position = new Vector3(player.transform.position.x, player.transform.position.y, transform.position.z);
+            yOffset = player.position.y;
+        }
+        else
+        {
+            yOffset = floorY;
         }
 
-
-        if (canMove == false)
+        // Let's set Offset in X axis.
+        if (player.position.x > wallX && lastWasRight == false)
         {
-
-            transform.position = new Vector3(transform.position.x, player.transform.position.y, transform.position.z);
-
-            if (rightWall == false && player.transform.position.x >= transform.position.x)
-            {
-                canMove = true;
-            }
-
-            if (rightWall == true && player.transform.position.x <= transform.position.x)
-            {
-                canMove = true;
-                rightWall = false;
-            }
+            xOffset = player.position.x;
+        }
+        else if (player.position.x < wallX && lastWasRight == true)
+        {
+            xOffset = player.position.x;
+        }
+        else
+        {
+            xOffset = wallX;
         }
 
-        Debug.Log("player.transform.position.x=" + player.transform.position.x);
+        transform.position = new Vector3(xOffset, yOffset, transform.position.z);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "RoomColliderLeft")
-        {
-            canMove = false;
-            rightWall = false;
-            transform.position.Set(transform.position.x + 0.1f, transform.position.y, transform.position.z);
-        }
-
-        if (collision.tag == "RoomColliderRight")
-        {
-            canMove = false;
-            rightWall = true;
-            transform.position.Set(transform.position.x - 0.1f, transform.position.y, transform.position.z);
-        }
-
         if (collision.tag == "RoomColliderFloor")
         {
-            cannotMoveDown = true;
-            floor = true;
-            transform.position.Set(transform.position.x, transform.position.y + 0.1f, transform.position.z);
+            floorY = transform.position.y;
+        }
+        if (collision.tag == "RoomColliderLeft")
+        {
+            wallX = transform.position.x;
+            lastWasRight = false;
+        }
+        if (collision.tag == "RoomColliderRight")
+        {
+            wallX = transform.position.x;
+            lastWasRight = true;
         }
     }
 }
