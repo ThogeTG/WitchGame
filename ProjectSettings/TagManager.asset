@@ -10,6 +10,9 @@ TagManager:
   - RoomColliderLeft
   - RoomColliderRight
   - RoomColliderFloor
+  - RoomChanger
+  - Room1Collider
+  - Room2Collider
   layers:
   - Default
   - TransparentFX

@@ -51,12 +51,20 @@ public class PlayerController : MonoBehaviour
 
     public bool lookRight;
 
+    public LevelManager lvlManager;
+    [SerializeField]
+    private bool canMove;
+
     void Start()
     {
+        canMove = true;
+
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
 
         lookRight = true;
+
+        lvlManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
 
         //anim = GetComponent<Animator>();
         //playerFind = GameObject.FindGameObjectWithTag("Player");
@@ -64,24 +72,28 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        h = Input.GetAxis("Horizontal");
-        v = Input.GetAxis("Vertical");
-
-        moveDir = new Vector2(h, 0);
-
-        transform.position += moveDir * moveSpeed * Time.deltaTime;
-
-        if (Input.GetButtonDown("Jump") && grounded)
+        if (canMove == true)
         {
-            jump = true;
-        }
+            h = Input.GetAxis("Horizontal");
+            v = Input.GetAxis("Vertical");
 
-        if (jump == true)
-        {
-            //rb.AddForce(new Vector2(0f, jumpForce));
-            rb.velocity = new Vector2(0, jumpSpeed);
-            jump = false;
+            moveDir = new Vector2(h, 0);
+
+            transform.position += moveDir * moveSpeed * Time.deltaTime;
+
+            if (Input.GetButtonDown("Jump") && grounded)
+            {
+                jump = true;
+            }
+
+            if (jump == true)
+            {
+                //rb.AddForce(new Vector2(0f, jumpForce));
+                rb.velocity = new Vector2(0, jumpSpeed);
+                jump = false;
+            }
         }
+        
     }
 
     void Update()
@@ -129,6 +141,18 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "Bullet")
         {
             PlayerTakesDamage(10);
+        }
+
+        if (collision.gameObject.tag == "RoomChanger")
+        {
+            lvlManager.ChangeRoom();
+            canMove = false;
+        }
+
+        if (collision.gameObject.tag == "Room2Collider")
+        {
+            lvlManager.changeRoom = false;
+            canMove = true;
         }
     }
 }

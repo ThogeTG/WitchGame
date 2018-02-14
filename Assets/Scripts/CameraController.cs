@@ -12,17 +12,19 @@ public class CameraController : MonoBehaviour
     public float cameraSize;
 
     public bool lastWasRight;
-  
-   void Start()
+
+    void Start()
     {
         player = GameObject.Find("Player").transform;
         cameraSize = gameObject.GetComponent<Camera>().orthographicSize;
+
+        //wallX;
     }
 
 
-  void Update()
+    void Update()
     {
-        
+
     }
 
     //Only place where we set position of the camera.
