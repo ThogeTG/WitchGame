@@ -13,6 +13,7 @@ TagManager:
   - RoomChanger
   - Room1Collider
   - Room2Collider
+  - Climb
   layers:
   - Default
   - TransparentFX

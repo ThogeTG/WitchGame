@@ -52,12 +52,18 @@ public class PlayerController : MonoBehaviour
     public bool lookRight;
 
     public LevelManager lvlManager;
-    [SerializeField]
-    private bool canMove;
+
+    public bool canMove;
+    public bool canJump;
+
+    public GameObject ladder;
+
+    public float playerPositionY;
 
     void Start()
     {
         canMove = true;
+        canJump = true;
 
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
@@ -81,19 +87,33 @@ public class PlayerController : MonoBehaviour
 
             transform.position += moveDir * moveSpeed * Time.deltaTime;
 
-            if (Input.GetButtonDown("Jump") && grounded)
+            if (canJump == true)
             {
-                jump = true;
+                if (Input.GetButtonDown("Jump") && grounded)
+                {
+                    jump = true;
+                }
+
+                if (jump == true)
+                {
+                    //rb.AddForce(new Vector2(0f, jumpForce));
+                    rb.velocity = new Vector2(0, jumpSpeed);
+                    jump = false;
+                }
             }
 
-            if (jump == true)
+            if (canJump == false)
             {
-                //rb.AddForce(new Vector2(0f, jumpForce));
-                rb.velocity = new Vector2(0, jumpSpeed);
-                jump = false;
+                moveDir = new Vector2(0, v);
+
+                transform.position += moveDir * moveSpeed * Time.deltaTime;
+
+                rb.gravityScale = 0;
+                rb.drag = 100;
             }
+
+
         }
-        
     }
 
     void Update()
@@ -149,10 +169,37 @@ public class PlayerController : MonoBehaviour
             canMove = false;
         }
 
-        if (collision.gameObject.tag == "Room2Collider")
+        /*if (collision.gameObject.tag == "Room2Collider")
         {
             lvlManager.changeRoom = false;
             canMove = true;
+        }*/
+
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Climb")
+        {
+            canJump = false;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Climb")
+        {
+            canJump = true;
+
+            rb.gravityScale = 1;
+            rb.drag = 0;
+
+            /*playerPositionY = transform.position.y + 2f;
+
+            if (playerPositionY > ladder.transform.position.y)
+            {
+                rb.gravityScale = 1;
+            }*/
         }
     }
 }
