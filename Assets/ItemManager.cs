@@ -19,7 +19,15 @@ public class ItemManager : MonoBehaviour
 
     public float mixTimer = 1;
 
+    public Sprite potionSprite;
+
     public List<Sprite> itemSprites = new List<Sprite>();
+
+    public Color emptyColor = new Color(0, 0, 0, 0);
+    public Color fullColor = new Color(255, 255, 255, 255);
+
+    private bool hasPotion;
+
     // Use this for initialization
     void Start()
     {
@@ -39,6 +47,11 @@ public class ItemManager : MonoBehaviour
         if (Input.GetKeyDown("m"))
         {
             mixUpdate = true;
+        }
+
+        if (Input.GetKeyDown("p") && hasPotion)
+        {
+            Instantiate();
         }
 
         if (Input.GetKeyDown("x") && eraseItemUpdate == false && itemSprites.Count > 0)
@@ -82,13 +95,28 @@ public class ItemManager : MonoBehaviour
             }
 
             items[0].GetComponent<RectTransform>().position -= new Vector3(mixSpeed,0,0);
-            items[0].GetComponent<RectTransform>().Rotate(0, 0, mixSpeed);
+            items[0].GetComponent<RectTransform>().Rotate(0, 0, mixSpeed * 2);
             items[2].GetComponent<RectTransform>().position += new Vector3(mixSpeed, 0, 0);
-            items[2].GetComponent<RectTransform>().Rotate(0, 0, -mixSpeed);
+            items[2].GetComponent<RectTransform>().Rotate(0, 0, -mixSpeed * 2);
+
+            if(items[0].GetComponent<RectTransform>().position.x >= items[1].GetComponent<RectTransform>().position.x)
+            {
+                //POTION IS BORN
+                mixUpdate = false;
+                items[1].GetComponent<Image>().sprite = potionSprite;
+
+                items[0].GetComponent<Image>().sprite = null;
+                items[2].GetComponent<Image>().sprite = null;
+
+                items[0].GetComponent<Image>().color = emptyColor;
+                items[2].GetComponent<Image>().color = emptyColor;
+
+                hasPotion = true;
+            }
 
             //if (items[0].GetComponent<RectTransform>().x) 
 
-            //items[2].GetComponent<RectTransform>().position += 0.1f;
+                //items[2].GetComponent<RectTransform>().position += 0.1f;
         }
         if(eraseItemUpdate)
         {
