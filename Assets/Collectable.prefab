@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 114743808566680304}
   - component: {fileID: 70716158272149746}
   m_Layer: 9
-  m_Name: Collectable#01
+  m_Name: Collectable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
