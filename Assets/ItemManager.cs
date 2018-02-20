@@ -14,6 +14,11 @@ public class ItemManager : MonoBehaviour
     public GameObject collectablePre;
     public Transform player;
 
+    public float mixAcceleration;
+    public float mixSpeed;
+
+    public float mixTimer = 1;
+
     public List<Sprite> itemSprites = new List<Sprite>();
     // Use this for initialization
     void Start()
@@ -33,7 +38,7 @@ public class ItemManager : MonoBehaviour
     {
         if (Input.GetKeyDown("m"))
         {
-            Mix();
+            mixUpdate = true;
         }
 
         if (Input.GetKeyDown("x") && eraseItemUpdate == false && itemSprites.Count > 0)
@@ -63,7 +68,27 @@ public class ItemManager : MonoBehaviour
 
         if (mixUpdate)
         {
-            //////items[0].GetComponent<RectTransform>()..x -= 0.1f;
+            eraseItemUpdate = false;
+
+            mixTimer -= Time.deltaTime; 
+            if (mixTimer < 0)
+            {
+                //Going outwards
+                mixSpeed -= (Time.deltaTime * mixAcceleration);
+            }
+            else
+            {
+                mixSpeed += (Time.deltaTime * mixAcceleration);
+            }
+
+            items[0].GetComponent<RectTransform>().position -= new Vector3(mixSpeed,0,0);
+            items[0].GetComponent<RectTransform>().Rotate(0, 0, mixSpeed);
+            items[2].GetComponent<RectTransform>().position += new Vector3(mixSpeed, 0, 0);
+            items[2].GetComponent<RectTransform>().Rotate(0, 0, -mixSpeed);
+
+            //if (items[0].GetComponent<RectTransform>().x) 
+
+            //items[2].GetComponent<RectTransform>().position += 0.1f;
         }
         if(eraseItemUpdate)
         {
@@ -90,10 +115,6 @@ public class ItemManager : MonoBehaviour
             itemSprites.Add(items[itemSprites.Count].GetComponent<Image>().sprite);
             Destroy(collectable);
         }
-    }
-    void Mix()
-    {
-        mixUpdate = true;
     }
 
     void EraseItem()

@@ -10,15 +10,23 @@ public class SlimeWall : MonoBehaviour {
     public int curFrame = 0;
     public float fps = 10;
 
+    [SerializeField]
+    private GameObject player;
+
+    [SerializeField]
+    private GameObject itemsNeeded; 
+
     public List<Sprite> unlockWith = new List<Sprite>();
 
     // Use this for initialization
     void Start () {
         spriteObject = transform.Find("Sprite").gameObject;
-	}
-	
-	// Update is called once per frame
-	void Update ()
+        
+        player = GameObject.Find("Player");
+    }
+
+    // Update is called once per frame
+    void Update()
     {
         changeTime -= Time.deltaTime;
 
