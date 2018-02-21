@@ -15,11 +15,35 @@ public class Potion : MonoBehaviour {
 	void Update () {
         transform.Rotate(0, 0, 5);
     }
-    void OnTriggerEnter(Collider2D collider)
+    void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collider.tag == "SlimeWall")
+        if(collision.gameObject.tag == "SlimeWall")
         {
-            Destroy(gameObject);
+            int clear = 0;
+            int ingCount = collision.gameObject.GetComponent<SlimeWall>().unlockWith.Count;
+            List<Sprite> tempCheck = collision.gameObject.GetComponent<SlimeWall>().unlockWith;
+
+            for (int i = 0; i < incredients.Count; i++)
+            {
+                for (int i2 = 0; i2 < tempCheck.Count; i2++)
+                {
+                    if (incredients[i] == tempCheck[i2])
+                    {
+                        clear += 1;
+                        tempCheck.Remove(tempCheck[i2]);
+                    }
+                }
+            }
+
+            if (clear == ingCount)
+            {
+                Destroy(gameObject);
+                Destroy(collision.gameObject);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

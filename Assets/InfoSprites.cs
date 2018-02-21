@@ -6,14 +6,14 @@ public class InfoSprites : MonoBehaviour {
 
     public GameObject itemsNeeded;
     public GameObject player;
-    public GameObject[] walls;
+    public List<GameObject> walls;
     public List<SpriteRenderer> neededSprites;
 
 	// Use this for initialization
 	void Start () {
         itemsNeeded = GameObject.Find("ItemsNeeded");
         player = GameObject.Find("Player");
-        walls = GameObject.FindGameObjectsWithTag("SlimeWall");
+        walls GameObject.FindGameObjectsWithTag("SlimeWall");
 
         for (int i = 0; i < itemsNeeded.transform.childCount; ++i)
         {
