@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212483517215328038}
   - component: {fileID: 58962255933314940}
   - component: {fileID: 50847717343374990}
+  - component: {fileID: 114897958858293634}
   m_Layer: 0
   m_Name: Fireball
   m_TagString: Untagged
@@ -77,6 +78,28 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &114897958858293634
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1093415138729206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: event:/FireballSounds/CastingFireball (2)
+  PlayEvent: 11
+  StopEvent: 12
+  CollisionTag: 
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 0
+  OverrideMaxDistance: 0
 --- !u!212 &212483517215328038
 SpriteRenderer:
   m_ObjectHideFlags: 1
