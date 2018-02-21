@@ -19,7 +19,7 @@ public class ItemManager : MonoBehaviour
 
     public float mixTimer = 1;
 
-    public Sprite potionSprite;
+    public GameObject potionPre;
 
     public List<Sprite> itemSprites = new List<Sprite>();
 
@@ -51,7 +51,10 @@ public class ItemManager : MonoBehaviour
 
         if (Input.GetKeyDown("p") && hasPotion)
         {
-            Instantiate();
+            GameObject spawned = Instantiate(potionPre, player.transform.position, Quaternion.identity);
+
+            spawned.GetComponent<Potion>().incredients = itemSprites;
+            spawned.GetComponent<Rigidbody2D>().velocity = new Vector2(4f,5f);
         }
 
         if (Input.GetKeyDown("x") && eraseItemUpdate == false && itemSprites.Count > 0)
@@ -82,6 +85,7 @@ public class ItemManager : MonoBehaviour
         if (mixUpdate)
         {
             eraseItemUpdate = false;
+            itemSelector.SetActive(false);
 
             mixTimer -= Time.deltaTime; 
             if (mixTimer < 0)
@@ -103,7 +107,7 @@ public class ItemManager : MonoBehaviour
             {
                 //POTION IS BORN
                 mixUpdate = false;
-                items[1].GetComponent<Image>().sprite = potionSprite;
+                items[1].GetComponent<Image>().sprite = potionPre.GetComponent<SpriteRenderer>().sprite;
 
                 items[0].GetComponent<Image>().sprite = null;
                 items[2].GetComponent<Image>().sprite = null;
