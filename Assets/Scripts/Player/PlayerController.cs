@@ -52,6 +52,7 @@ public class PlayerController : MonoBehaviour
     public bool lookRight;
 
     public LevelManager lvlManager;
+    public CameraController cameraController;
 
     public bool canMove;
     public bool canJump;
@@ -71,6 +72,8 @@ public class PlayerController : MonoBehaviour
         lookRight = true;
 
         lvlManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+
+        cameraController = Camera.main.GetComponent<CameraController>();
 
         //anim = GetComponent<Animator>();
         //playerFind = GameObject.FindGameObjectWithTag("Player");
@@ -165,15 +168,14 @@ public class PlayerController : MonoBehaviour
 
         if (collision.gameObject.tag == "RoomChanger")
         {
-            lvlManager.ChangeRoom();
+            GameObject roomChanger = collision.gameObject;
+            lvlManager.ChangeRoom(roomChanger);
             canMove = false;
-        }
 
-        /*if (collision.gameObject.tag == "Room2Collider")
-        {
-            lvlManager.changeRoom = false;
-            canMove = true;
-        }*/
+
+            cameraController.canMove = false;
+            //cameraController.ChangeRoom();
+        }
 
     }
 
