@@ -13,7 +13,7 @@ public class InfoSprites : MonoBehaviour {
 	void Start () {
         itemsNeeded = GameObject.Find("ItemsNeeded");
         player = GameObject.Find("Player");
-        walls GameObject.FindGameObjectsWithTag("SlimeWall");
+        walls.AddRange(GameObject.FindGameObjectsWithTag("SlimeWall"));
 
         for (int i = 0; i < itemsNeeded.transform.childCount; ++i)
         {
@@ -24,11 +24,21 @@ public class InfoSprites : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        for (int i = 0; i < walls.Length; i++)
+        for (int i = 0; i < walls.Count; i++)
         {
             if (5 > Vector2.Distance(player.transform.position, walls[i].transform.position))
             {
-                itemsNeeded.transform.position = new Vector3(walls[i].transform.position.x - 3.5f, walls[i].transform.position.y + 2);
+                if (player.transform.position.x < walls[i].transform.position.x)
+                {
+                    itemsNeeded.transform.position = new Vector3(walls[i].transform.position.x - 3.5f, walls[i].transform.position.y + 2);
+                    itemsNeeded.transform.GetComponent<SpriteRenderer>().flipX = false;
+                }
+                else
+                {
+                    itemsNeeded.transform.position = new Vector3(walls[i].transform.position.x + 3.5f, walls[i].transform.position.y + 2);
+                    itemsNeeded.transform.GetComponent<SpriteRenderer>().flipX = true;
+                }
+
                 for (int i2 = 0; i2 < 3; i2++)
                 {
                     neededSprites[i2].sprite = walls[i].GetComponent<SlimeWall>().unlockWith[i2];

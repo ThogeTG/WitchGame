@@ -7,6 +7,9 @@ public class ItemManager : MonoBehaviour
 {
 
     public List<GameObject> items;
+
+    public List<Vector3> itemsOriPos;
+
     bool mixUpdate = false;
     bool eraseItemUpdate = false;
     public GameObject itemSelector;
@@ -37,6 +40,11 @@ public class ItemManager : MonoBehaviour
         items.Add(gameObject.transform.Find("Item02").gameObject);
         items.Add(gameObject.transform.Find("Item03").gameObject);
 
+        for (int i = 0; i < items.Count; i++)
+        {
+            itemsOriPos.Add(items[i].GetComponent<RectTransform>().position);
+        }
+
         player = GameObject.Find("Player").transform;
 
     }
@@ -54,7 +62,24 @@ public class ItemManager : MonoBehaviour
             GameObject spawned = Instantiate(potionPre, player.transform.position, Quaternion.identity);
 
             spawned.GetComponent<Potion>().incredients = itemSprites;
-            spawned.GetComponent<Rigidbody2D>().velocity = new Vector2(4f,5f);
+            itemSprites = new List<Sprite>();
+            if(player.transform.Find("Sprite").GetComponent<SpriteRenderer>().flipX == true)
+            {
+                spawned.GetComponent<Rigidbody2D>().velocity = new Vector2(-4f, 5f);
+            }
+            else
+            {
+                spawned.GetComponent<Rigidbody2D>().velocity = new Vector2(4f, 5f);
+            }
+
+            hasPotion = false;
+            items[1].GetComponent<Image>().sprite = null;
+            items[0].GetComponent<Image>().color = fullColor;
+            items[2].GetComponent<Image>().color = fullColor;
+            items[0].GetComponent<RectTransform>().position = itemsOriPos[0];
+            items[2].GetComponent<RectTransform>().position = itemsOriPos[2];
+            items[0].GetComponent<RectTransform>().eulerAngles = new Vector3(0,0,0);
+            items[2].GetComponent<RectTransform>().eulerAngles = new Vector3(0,0,0);
         }
 
         if (Input.GetKeyDown("x") && eraseItemUpdate == false && itemSprites.Count > 0)
