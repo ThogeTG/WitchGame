@@ -28,8 +28,10 @@ public class ItemManager : MonoBehaviour
 
     public Color emptyColor = new Color(0, 0, 0, 0);
     public Color fullColor = new Color(255, 255, 255, 255);
+    [SerializeField]
+    bool hasPotion;
 
-    private bool hasPotion;
+    private GameObject spawned;
 
     // Use this for initialization
     void Start()
@@ -59,11 +61,10 @@ public class ItemManager : MonoBehaviour
 
         if (Input.GetKeyDown("p") && hasPotion)
         {
-            GameObject spawned = Instantiate(potionPre, player.transform.position, Quaternion.identity);
-
+            spawned = Instantiate(potionPre, player.transform.position, Quaternion.identity);
             spawned.GetComponent<Potion>().incredients = itemSprites;
             itemSprites = new List<Sprite>();
-            if(player.transform.Find("Sprite").GetComponent<SpriteRenderer>().flipX == true)
+            if(player.GetComponent<SpriteRenderer>().flipX == true)
             {
                 spawned.GetComponent<Rigidbody2D>().velocity = new Vector2(-4f, 5f);
             }
@@ -89,9 +90,9 @@ public class ItemManager : MonoBehaviour
 
         else if (Input.GetKeyDown("x") && itemSelector.active == true)
         {
-            GameObject spawned = Instantiate(collectablePre, player.position, Quaternion.identity);
-            spawned.transform.Find("Sprite").GetComponent<SpriteRenderer>().sprite = itemSprites[curItem];
-            spawned.GetComponent<Rigidbody2D>().velocity = new Vector2(Random.Range(-3.0f, 3.0f), Random.Range(4.0f, 6.0f));
+            GameObject spawned2 = Instantiate(collectablePre, player.position, Quaternion.identity);
+            spawned2.transform.Find("Sprite").GetComponent<SpriteRenderer>().sprite = itemSprites[curItem];
+            spawned2.GetComponent<Rigidbody2D>().velocity = new Vector2(Random.Range(-3.0f, 3.0f), Random.Range(4.0f, 6.0f));
             itemSprites.Remove(itemSprites[curItem]);
 
             for (int i = 0; i < items.Count; i++)

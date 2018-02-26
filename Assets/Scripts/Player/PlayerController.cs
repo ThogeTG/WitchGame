@@ -159,6 +159,14 @@ public class PlayerController : MonoBehaviour
         Health -= damage;
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "EnemyJumping")
+        {
+            PlayerTakesDamage(10);
+        }
+    }
+
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Bullet")
