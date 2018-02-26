@@ -1547,6 +1547,11 @@ Prefab:
       propertyPath: ladder
       value: 
       objectReference: {fileID: 1944006143}
+    - target: {fileID: 212002922748779556, guid: d59d46240e37d044282aebea5eac8d0b,
+        type: 2}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d46240e37d044282aebea5eac8d0b, type: 2}
   m_IsPrefabParent: 0
@@ -1611,7 +1616,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 81556ffbc1be1f844b873fcd0d773910, type: 3}
   m_Color: {r: 0.6544118, g: 0.47494632, b: 0.15397924, a: 1}
   m_FlipX: 0
@@ -5105,7 +5110,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 81556ffbc1be1f844b873fcd0d773910, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
