@@ -1,0 +1,5 @@
+{0c972408-4cc9-4077-9d8d-2c634e67caaa} event:/FireballSounds/CastingFireball
+{fedd825a-aa01-48d8-b1c7-b1d9ad11fff5} event:/FireballSounds/CastingFireball (2)
+{775ec247-3c8d-460b-967b-ba1d925e82c6} bus:/
+{11b18f56-67d4-4dac-8e67-de65554d37bc} bus:/Reverb
+{3352e83a-a3b7-4508-998a-80dc35b904b0} bank:/Master Bank

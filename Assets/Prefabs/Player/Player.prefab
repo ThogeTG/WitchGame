@@ -126,6 +126,12 @@ MonoBehaviour:
   fireBall: {fileID: 1093415138729206, guid: bdff0779e18f4a04aa1bdbc8bd5100c9, type: 2}
   fireBallSpeed: 1000
   lookRight: 0
+  lvlManager: {fileID: 0}
+  cameraController: {fileID: 0}
+  canMove: 0
+  canJump: 0
+  ladder: {fileID: 0}
+  playerPositionY: 0
 --- !u!212 &212002922748779556
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -157,7 +163,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: 1bf69c2a615575b4aa36d87d838d2e02, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
