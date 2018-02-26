@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="AudioFile" id="{d0dd4d1d-ad5a-4503-98c4-121f028731db}">
+        <property name="assetPath">
+            <value>fireballCast.wav</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>0.83306122448979592</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{ec14909a-1e3b-4c25-b862-1dfbed69c96e}</destination>
+        </relationship>
+    </object>
+</objects>
