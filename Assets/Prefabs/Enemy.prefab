@@ -67,7 +67,7 @@ Transform:
   m_GameObject: {fileID: 1156805260589402}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.4, y: -1.84, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 4609970125532690}
   m_Father: {fileID: 0}
@@ -203,12 +203,14 @@ MonoBehaviour:
   player: {fileID: 0}
   thrust: 100
   jumpTimer: 3
-  HP: 0
+  HP: 3
   aSource: {fileID: 0}
   jumpSound: {fileID: 0}
   landingSound: {fileID: 0}
   grounded: 1
   groundCheck: {fileID: 4609970125532690}
+  spriteRen: {fileID: 0}
+  attack: {fileID: 0}
 --- !u!212 &212959097600506286
 SpriteRenderer:
   m_ObjectHideFlags: 1
